@@ -100,7 +100,7 @@ export default function PhaseGatekeeper({ onYes }: Props) {
         >
           Happy Birthday,
           <br />
-          <em style={{ color: 'var(--blush)' }}>you.</em>
+          <em style={{ color: 'var(--blush)' }}>Jigglytuff.</em>
         </motion.h1>
 
         {/* Sub-prompt */}
@@ -201,7 +201,7 @@ export default function PhaseGatekeeper({ onYes }: Props) {
           userSelect: 'none',
         }}
       >
-        Not yet...
+        Nopes...
       </button>
     </motion.div>
   )
