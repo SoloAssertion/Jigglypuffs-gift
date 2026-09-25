@@ -1,8 +1,23 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 export function useAudio(src: string) {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [muted, setMuted] = useState(false)
+
+  // Pause when tab is hidden, resume when visible
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (!audioRef.current) return
+      if (document.hidden) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play().catch(() => {})
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => document.removeEventListener('visibilitychange', handleVisibility)
+  }, [])
 
   const play = () => {
     if (!audioRef.current) {
