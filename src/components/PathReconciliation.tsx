@@ -5,7 +5,7 @@ interface Props {
   onRestart: () => void
 }
 
-function useConfetti(canvasRef: React.RefObject<HTMLCanvasElement>) {
+function useConfetti(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -94,7 +94,7 @@ function useConfetti(canvasRef: React.RefObject<HTMLCanvasElement>) {
 }
 
 export default function PathReconciliation({ onRestart }: Props) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
   useConfetti(canvasRef)
 
   return (
