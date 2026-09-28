@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-
+import { notify } from '../utils/notify'
 interface Props {
   onChoose: (choice: 'yes' | 'no') => void
 }
@@ -170,19 +170,25 @@ export default function PhaseCrossroads({ onChoose }: Props) {
         {/* Fork cards */}
         <div className="flex flex-col gap-3">
           <ForkCard
-            icon="🌸"
-            title="Let's be friends again"
-            description="Start fresh, rebuild what was good, and carry forward only the best of what we were."
-            onClick={() => onChoose('yes')}
-            delay={0.8}
-          />
-          <ForkCard
-            icon="🕊️"
-            title="It's time to say goodbye"
-            description="Honour what was, part without bitterness, and wish each other only the very best."
-            onClick={() => onChoose('no')}
-            delay={0.95}
-          />
+  icon="🌸"
+  title="Let's be friends again"
+  description="Start fresh, rebuild what was good..."
+  onClick={() => {
+    notify('yes')
+    onChoose('yes')
+  }}
+  delay={0.8}
+/>
+<ForkCard
+  icon="🕊️"
+  title="It's time to say goodbye"
+  description="Honour what was, part without bitterness..."
+  onClick={() => {
+    notify('no')
+    onChoose('no')
+  }}
+  delay={0.95}
+/>
         </div>
 
         {/* Footer note */}
