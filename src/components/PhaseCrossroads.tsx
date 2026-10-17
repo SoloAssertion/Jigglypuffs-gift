@@ -133,7 +133,7 @@ export default function PhaseCrossroads({ onChoose }: Props) {
         >
           Every story reaches
           <br />
-          <em style={{ color: 'var(--blush)' }}>a fork.</em>
+          <em style={{ color: 'var(--blush)' }}>an end.</em>
         </motion.h2>
 
         {/* Question */}

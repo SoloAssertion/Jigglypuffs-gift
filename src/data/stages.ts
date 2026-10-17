@@ -26,18 +26,23 @@ export const STAGES: Stage[] = [
     body: `Tho we never actually met except for that quick Hi in chem lab when our common friend told you pointing at me "look there's parth" and you waved at me lmao, flabbergasted and nervous, i just waved back and left cuz obv dipali mam was nagging me and my frnd to leave, except for this moment we have only been in an online friendship and war from start till the very end... tho at the beginning sharing reels, snaps and quick gossips were fun, my few actions definetly created an unchangeable image of mine, all my fault tho, but definetly wasnt from a creeping pov but no matter what i can do, i cant change that tag at any point since it seems to be hardcoded into you atp. Tho i wish everyday to get rid of it but what has happened back then cant be changed...`,
   },
   {
-    label: '',
-    title: '',
-    body: '',
+    label: 'Chapter 4',
+    title: 'Unwanted persona and messed up misunderstandings',
+    body: 'Back then i used to update you about other fellas showing ypur acc to other friends of theirs, yk obv who, since then it was all an follow unfollow game for everyone with ya, tried my best to make you feel trustable but ig, i definelty failed at it...',
   },
     {
-    label: '',
-    title: '',
-    body: '',
+    label: 'Chapter 5',
+    title: 'The Stalker',
+    body: 'Obv one of the things that F`ed up quite alot of things, back then when i didnt even knew you, we had a common friend, who helped me know about ya, tho it was to know and am attempt to peek at your lifestyle, its okay and liable for you to be insecure and feel creeped out, no matter how many times i would ask you to not think of me as an creep but as a Girl its obv understandable and I guess i did cross quite a few boundaries back then..',
   },
     {
-    label: '',
-    title: '',
-    body: '',
+    label: 'Chapter 6',
+    title: 'Exam Time Mess',
+    body: 'This was the craziest and quite the worst thing that has happened, all the lies, to try to fix the mess, which lead the problem to keep twisting and twisting, and ended up with quite a chaos, Apologies for actions, genuinely (only the ones that affected you, tho no F`s for the guy who tried scaring me with law?, who literally forced me to take up higher steps to just ss the CC form lmao which i never submitted, and was never gonna do anyways obv, but yeah, it wasnt to mess with ya but an attempt to get rid of the unexpected guests i had, and also obv i dont lie but my dumbaah was crazy back then who thought lying would fix the mess, my bad).',
+  },
+    {
+    label: 'Final Chapter',
+    title: 'Last Message?',
+    body: 'Now, I dont have anything to say, or to apologize any further, not that i dont want to fix the mess, but just that its so F`ed up that no matter how many sorries i say, it wont fix what has happened... Have changed obv since my father passed away six days later from 18th birthday, Trying to improve, be more and more mature everyday, but hopes never die, but i dont think attempting to fix any of it by apologizing, and doing sugary stuffs aint gonna do nothing... but didnt wanted to end it badly either, so just wanted to present a quick Pov go thru just to formally and fairly say Goodbye',
   },
 ];
