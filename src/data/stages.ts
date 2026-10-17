@@ -45,4 +45,9 @@ export const STAGES: Stage[] = [
     title: 'Last Message?',
     body: 'Now, I dont have anything to say, or to apologize any further, not that i dont want to fix the mess, but just that its so F`ed up that no matter how many sorries i say, it wont fix what has happened... Have changed obv since my father passed away six days later from 18th birthday, Trying to improve, be more and more mature everyday, but hopes never die, but i dont think attempting to fix any of it by apologizing, and doing sugary stuffs aint gonna do nothing... but didnt wanted to end it badly either, so just wanted to present a quick Pov go thru just to formally and fairly say Goodbye',
   },
+  {
+    label: 'Note',
+    title: 'A quick note for ya',
+    body: 'Tho i have messed up things but dont expect me to stop wishing you happy birthday`s tho i wont nag into your DM`s if you tell me not to on telegram, but you can anytime comeback here to find new wishes or notes from me. Happy Birthday!!!!! Jigglytuff (the real life tuff variant of jigglypuff😛)',
+  },
 ];
