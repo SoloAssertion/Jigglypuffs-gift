@@ -137,7 +137,8 @@ export default function PhaseGatekeeper({ onYes }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.05 }}
         >
-          "Are you ready to take a walk down memory lane with me?"
+          "Are you ready to take a walk down memory lane with me?
+          (⚠️ Increase your phones/headphones volume for a more immersive experience)"
         </motion.p>
 
         {/* Yes button */}
