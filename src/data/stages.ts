@@ -6,6 +6,11 @@ export interface Stage {
 
 export const STAGES: Stage[] = [
   {
+    label: 'Preface',
+    title: 'A note before you read',
+    body: 'This is not an attempt of me to make up for what has happened so far or to lie just for the sake of friendship but just a geniune POV of mine...',
+  },
+  {
     label: 'Chapter one',
     title: 'First Sight & The Beginning',
     body: `There's always a specific moment — a look, a laugh, a coincidence — that marks where two people's story begins. Ours started just like that. Something small, something unremarkable to everyone else, but to us it was the first page of something I didn't know I needed.`,
