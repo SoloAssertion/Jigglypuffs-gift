@@ -137,8 +137,7 @@ export default function PhaseGatekeeper({ onYes }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.05 }}
         >
-          "Are you ready to take a walk down memory lane with me?
-          (⚠️ Increase your phones/headphones volume for a more immersive experience)"
+          "Are you ready to take a walk down memory lane with me?"
         </motion.p>
 
         {/* Yes button */}
@@ -176,6 +175,32 @@ export default function PhaseGatekeeper({ onYes }: Props) {
         >
           Yes, I'm ready
         </motion.button>
+
+        {/* Volume note */}
+        <motion.div
+          className="font-sans"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginTop: '2rem',
+            padding: '0.55rem 0.95rem',
+            borderRadius: '12px',
+            border: '1px solid rgba(247,238,240,0.12)',
+            background: 'rgba(247,238,240,0.04)',
+            color: 'rgba(247,238,240,0.55)',
+            fontSize: '0.72rem',
+            letterSpacing: '0.04em',
+            lineHeight: 1.5,
+            maxWidth: '280px',
+          }}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.6 }}
+        >
+          <span aria-hidden="true" style={{ fontSize: '0.95rem' }}>🎧</span>
+          <span>Best with sound on. Turn up your volume or plug in headphones.</span>
+        </motion.div>
       </div>
 
       {/* Evasive No button */}
