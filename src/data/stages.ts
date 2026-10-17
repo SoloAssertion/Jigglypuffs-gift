@@ -38,7 +38,7 @@ export const STAGES: Stage[] = [
     {
     label: 'Chapter 6',
     title: 'Exam Time Mess',
-    body: 'This was the craziest and quite the worst thing that has happened, all the lies, to try to fix the mess, which lead the problem to keep twisting and twisting, and ended up with quite a chaos, Apologies for actions, genuinely (only the ones that affected you, tho no F`s for the guy who tried scaring me with law?, who literally forced me to take up higher steps to just ss the CC form lmao which i never submitted, and was never gonna do anyways obv, but yeah, it wasnt to mess with ya but an attempt to get rid of the unexpected guests i had, and also obv i dont lie but my dumbaah was crazy back then who thought lying would fix the mess, my bad).',
+    body: 'This was the craziest and quite the worst thing that has happened, all the lies, to try to fix the mess, which lead the problem to keep twisting and twisting, and ended up with quite a chaos. Apologies for my actions, genuinely, especially the lies, my dumbaah was crazy back then who thought lying would fix the mess, but it only made it worse, my bad.',
   },
     {
     label: 'Final Chapter',
@@ -48,6 +48,6 @@ export const STAGES: Stage[] = [
   {
     label: 'Note',
     title: 'A quick note for ya',
-    body: 'Tho i have messed up things but dont expect me to stop wishing you happy birthday`s tho i wont nag into your DM`s if you tell me not to on telegram, but you can anytime comeback here to find new wishes or notes from me. Happy Birthday!!!!! Jigglytuff (the real life tuff variant of jigglypuff😛)',
+    body: 'Tho i have messed up things but dont expect me to stop wishing you happy birthday`s tho i wont nag into your DM`s if you tell me not to on tele/wp for this last time, but you can anytime comeback here to find new wishes from me. Happy Birthday!!!!! Jigglytuff (the real life tuff variant of jigglypuff😛)',
   },
 ];
