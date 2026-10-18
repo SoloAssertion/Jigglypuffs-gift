@@ -48,6 +48,6 @@ export const STAGES: Stage[] = [
   {
     label: 'Note',
     title: 'A quick note for ya',
-    body: 'Tho i have messed up things but dont expect me to stop wishing you happy birthday`s tho i wont nag into your DM`s if you tell me not to on tele/wp for this last time, but you can anytime comeback here to find new wishes from me. Happy Birthday!!!!! Jigglytuff (the real life tuff variant of jigglypuff😛)',
+    body: 'Tho i have messed up things but dont expect me to stop wishing you happy birthday`s tho i wont nag into your DM`s if you tell me not to on tele/wp for this last time, but you can anytime comeback here to find new wishes from me. Happy Birthday!!!!! Jigglytuff (the real life tuff version of jigglypuff😛)',
   },
 ];

@@ -190,7 +190,7 @@ export default function PhaseCrossroads({ onChoose }: Props) {
   delay={0.95}
 />
 <ForkCard
-  icon="️"
+  icon="️🍀"
   title="Dont wanna answer.."
   description="Dont feel like answering? its okay.."
   onClick={() => {

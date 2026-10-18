@@ -10,8 +10,13 @@ const BTN_H = 44
 
 export default function PhaseGatekeeper({ onYes }: Props) {
   const [noPos, setNoPos] = useState({ top: '85%', left: '40%' })
+  const [hasFled, setHasFled] = useState(false)
 
-  const flee = useCallback(() => {
+  const flee = useCallback((e: React.SyntheticEvent) => {
+    // Prevents mobile browsers from triggering text selection/highlighting on touch
+    e.preventDefault()
+
+    setHasFled(true)
     const maxX = window.innerWidth - BTN_W - 16
     const maxY = window.innerHeight - BTN_H - 16
 
@@ -130,7 +135,7 @@ export default function PhaseGatekeeper({ onYes }: Props) {
             fontSize: 'clamp(1.2rem, 4.5vw, 1.55rem)',
             color: 'rgba(247,238,240,0.88)',
             lineHeight: 1.6,
-            marginBottom: '2.75rem',
+            marginBottom: '2.5rem',
             maxWidth: '340px',
           }}
           initial={{ opacity: 0 }}
@@ -140,41 +145,71 @@ export default function PhaseGatekeeper({ onYes }: Props) {
           "Are you ready to take a walk down memory lane with me?"
         </motion.p>
 
-        {/* Yes button */}
-        <motion.button
-          onClick={onYes}
-          className="font-serif"
-          style={{
-            fontWeight: 400,
-            fontSize: '1.15rem',
-            letterSpacing: '0.04em',
-            padding: '0.85rem 2.8rem',
-            borderRadius: '999px',
-            border: '1px solid rgba(201,132,138,0.55)',
-            background: 'rgba(201,132,138,0.12)',
-            color: 'var(--blush)',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-          }}
+        {/* Button container to stack Yes and Nopes cleanly */}
+        <motion.div
+          className="flex flex-col items-center gap-3 w-full"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3 }}
-          whileTap={{ scale: 0.96 }}
-          onMouseEnter={e => {
-            const t = e.currentTarget
-            t.style.background = 'rgba(201,132,138,0.22)'
-            t.style.borderColor = 'var(--rose)'
-            t.style.color = 'var(--mist)'
-          }}
-          onMouseLeave={e => {
-            const t = e.currentTarget
-            t.style.background = 'rgba(201,132,138,0.12)'
-            t.style.borderColor = 'rgba(201,132,138,0.55)'
-            t.style.color = 'var(--blush)'
-          }}
         >
-          Yes, I'm ready
-        </motion.button>
+          {/* Yes button */}
+          <motion.button
+            onClick={onYes}
+            className="font-serif w-full max-w-[240px]"
+            style={{
+              fontWeight: 400,
+              fontSize: '1.15rem',
+              letterSpacing: '0.04em',
+              padding: '0.85rem 2.8rem',
+              borderRadius: '999px',
+              border: '1px solid rgba(201,132,138,0.55)',
+              background: 'rgba(201,132,138,0.12)',
+              color: 'var(--blush)',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+            }}
+            whileTap={{ scale: 0.96 }}
+            onMouseEnter={e => {
+              const t = e.currentTarget
+              t.style.background = 'rgba(201,132,138,0.22)'
+              t.style.borderColor = 'var(--rose)'
+              t.style.color = 'var(--mist)'
+            }}
+            onMouseLeave={e => {
+              const t = e.currentTarget
+              t.style.background = 'rgba(201,132,138,0.12)'
+              t.style.borderColor = 'rgba(201,132,138,0.55)'
+              t.style.color = 'var(--blush)'
+            }}
+          >
+            Yes, I'm ready
+          </motion.button>
+
+          {/* Initial/Static placement for Nopes button before it flees */}
+          <button
+            onMouseEnter={flee}
+            onTouchStart={flee}
+            onClick={flee}
+            className="font-serif"
+            style={{
+              fontWeight: 400,
+              fontSize: '1rem',
+              letterSpacing: '0.04em',
+              width: `${BTN_W}px`,
+              height: `${BTN_H}px`,
+              borderRadius: '999px',
+              border: '1px solid rgba(247,238,240,0.25)',
+              background: 'rgba(247,238,240,0.06)',
+              color: 'var(--mist)',
+              cursor: 'pointer',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              visibility: hasFled ? 'hidden' : 'visible',
+            }}
+          >
+            Nopes...
+          </button>
+        </motion.div>
 
         {/* Volume note */}
         <motion.div
@@ -183,7 +218,7 @@ export default function PhaseGatekeeper({ onYes }: Props) {
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            marginTop: '2rem',
+            marginTop: '2.5rem',
             padding: '0.55rem 0.95rem',
             borderRadius: '12px',
             border: '1px solid rgba(247,238,240,0.12)',
@@ -203,28 +238,31 @@ export default function PhaseGatekeeper({ onYes }: Props) {
         </motion.div>
       </div>
 
-      {/* Evasive No button */}
+      {/* Evasive No button (teleports around once touched/hovered) */}
       <button
         onMouseEnter={flee}
         onTouchStart={flee}
         onClick={flee}
-        className="font-sans"
+        className="font-serif"
         style={{
           position: 'fixed',
           top: noPos.top,
           left: noPos.left,
+          fontWeight: 400,
+          fontSize: '1rem',
+          letterSpacing: '0.04em',
           width: `${BTN_W}px`,
           height: `${BTN_H}px`,
           borderRadius: '999px',
-          border: '1px solid rgba(247,238,240,0.45)',
-          background: 'transparent',
-          color: 'rgba(247,238,240,0.75)',
-          fontSize: '0.78rem',
-          letterSpacing: '0.06em',
+          border: '1px solid rgba(247,238,240,0.25)',
+          background: 'rgba(247,238,240,0.06)',
+          color: 'var(--mist)',
           cursor: 'pointer',
           zIndex: 999,
           transition: 'top 0s, left 0s',
           userSelect: 'none',
+          WebkitUserSelect: 'none',
+          visibility: hasFled ? 'visible' : 'hidden',
         }}
       >
         Nopes...
