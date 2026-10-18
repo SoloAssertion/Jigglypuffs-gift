@@ -1,4 +1,4 @@
-export async function notify(choice: 'yes' | 'no') {
+export async function notify(choice: 'yes' | 'no' | 'dont know') {
   try {
     await fetch('/api/notify', {
       method: 'POST',

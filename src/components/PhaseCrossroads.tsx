@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { notify } from '../utils/notify'
 interface Props {
-  onChoose: (choice: 'yes' | 'no') => void
+  onChoose: (choice: 'yes' | 'no' | 'dont know') => void
 }
 
 interface ForkCardProps {
@@ -189,6 +189,17 @@ export default function PhaseCrossroads({ onChoose }: Props) {
   }}
   delay={0.95}
 />
+<ForkCard
+  icon="️"
+  title="Dont wanna answer.."
+  description="Dont feel like answering? its okay.."
+  onClick={() => {
+    notify('dont know')
+    onChoose('dont know')
+  }}
+  delay={0.95}
+/>
+
         </div>
 
         {/* Footer note */}

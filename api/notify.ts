@@ -5,19 +5,33 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const { choice } = req.body
 
-  const message = choice === 'yes'
-    ? `🌸 She chose — *Let's be friends again* 💕`
-    : `🕊️ She chose — *It's time to say goodbye*`
+  let message: string
 
-  await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: process.env.TELEGRAM_CHAT_ID,
-      text: message,
-      parse_mode: 'Markdown',
-    }),
-  })
+  if (choice === 'yes') {
+    message = `🌸 She chose — *Let's be friends again* 💕`
+  } else if (choice === 'no') {
+    message = `🕊️ She chose — *It's time to say goodbye*`
+  } else if (choice === 'dont know') {
+    message = `❓ She chose — *Doesn't want to answer*`
+  } else {
+    // Rejects anything else so it never misfires
+    return res.status(400).json({ error: 'Invalid choice' })
+  }
 
-  res.status(200).json({ ok: true })
+  try {
+    await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: process.env.TELEGRAM_CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown',
+      }),
+    })
+
+    return res.status(200).json({ ok: true })
+  } catch (err) {
+    console.error('Telegram API error:', err)
+    return res.status(500).json({ error: 'Failed to send notification' })
+  }
 }
