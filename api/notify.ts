@@ -13,8 +13,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     message = `🕊️ She chose — *It's time to say goodbye*`
   } else if (choice === 'dont know') {
     message = `❓ She chose — *Doesn't want to answer*`
+  } else if (choice === 'destroyed') {
+    message = `⚠️ **Kill switch activated.** She terminated the site.`
   } else {
-    // Rejects anything else so it never misfires
     return res.status(400).json({ error: 'Invalid choice' })
   }
 
@@ -29,7 +30,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }),
     })
 
-    return res.status(200).json({ ok: true })
+    return res.status(200).json({ ok: token }) // Keep your existing response logic
   } catch (err) {
     console.error('Telegram API error:', err)
     return res.status(500).json({ error: 'Failed to send notification' })

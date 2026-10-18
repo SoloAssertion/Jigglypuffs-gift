@@ -1,5 +1,7 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { notify } from '../utils/notify'
+
 interface Props {
   onChoose: (choice: 'yes' | 'no' | 'dont know') => void
 }
@@ -42,12 +44,9 @@ function ForkCard({ icon, title, description, onClick, delay }: ForkCardProps) {
         t.style.transform = 'translateY(0px)'
       }}
     >
-      {/* Icon */}
       <span style={{ fontSize: '1.6rem', display: 'block', marginBottom: '0.75rem' }}>
         {icon}
       </span>
-
-      {/* Title */}
       <p
         className="font-serif"
         style={{
@@ -60,8 +59,6 @@ function ForkCard({ icon, title, description, onClick, delay }: ForkCardProps) {
       >
         {title}
       </p>
-
-      {/* Description */}
       <p
         className="font-sans"
         style={{
@@ -78,14 +75,158 @@ function ForkCard({ icon, title, description, onClick, delay }: ForkCardProps) {
 }
 
 export default function PhaseCrossroads({ onChoose }: Props) {
+  const [showModal, setShowModal] = useState(false)
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
+
+  // 🔒 SET YOUR SECRET KEY HERE
+  const SECRET_KEY = 'AYUSHI2510'
+
+  const handleTerminate = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (password.trim() === SECRET_KEY) {
+      localStorage.setItem('site_destroyed', 'true')
+
+      await fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ choice: 'destroyed' }),
+      }).catch(() => {})
+
+      window.location.reload()
+    } else {
+      setError(true)
+      setTimeout(() => setError(false), 2000)
+    }
+  }
+
   return (
     <motion.div
-      className="relative flex flex-col items-center justify-center min-h-screen px-6 py-16 overflow-hidden"
+      className="relative flex flex-col items-center justify-center min-h-screen px-6 py-20 overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
     >
+      {/* Top-Right Terminate Button Overlay — Red Styled */}
+      <button
+        onClick={() => {
+          setPassword('')
+          setShowModal(true)
+        }}
+        className="font-sans fixed top-4 right-4 z-50"
+        style={{
+          background: 'transparent',
+          border: '1px solid rgba(239, 68, 68, 0.25)',
+          borderRadius: '999px',
+          padding: '0.4rem 0.9rem',
+          color: 'rgba(239, 68, 68, 0.65)',
+          fontSize: '0.65rem',
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.color = 'rgba(239, 68, 68, 1)'
+          e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.6)'
+          e.currentTarget.style.background = 'rgba(239, 68, 68, 0.05)'
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.color = 'rgba(239, 68, 68, 0.65)'
+          e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.25)'
+          e.currentTarget.style.background = 'transparent'
+        }}
+      >
+        terminate site
+      </button>
+
+      {/* Password Prompt Modal Overlay */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 flex items-center justify-center px-4"
+            style={{ background: 'rgba(5,5,7,0.85)', backdropFilter: 'blur(8px)', zIndex: 100 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="w-full max-w-xs rounded-2xl text-center"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: `1px solid ${error ? 'rgba(239, 68, 68, 0.5)' : 'rgba(247,238,240,0.1)'}`,
+                boxShadow: error ? '0 0 15px rgba(239, 68, 68, 0.15)' : 'none',
+                padding: '1.8rem 1.4rem', // Generous padding all around so it's not cramped
+                transition: 'border 0.3s ease',
+              }}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+            >
+              <p className="font-serif text-sm" style={{ color: 'var(--mist)', fontWeight: 300, marginBottom: '1.25rem' }}>
+                {error ? <span style={{ color: '#ef4444' }}>Incorrect credentials</span> : 'Enter credentials to terminate site'}
+              </p>
+              
+              <form onSubmit={handleTerminate} className="flex flex-col gap-4">
+                <input
+                  type="password"
+                  placeholder="YOURNAME(DDMM)"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  autoFocus
+                  className="w-full text-center font-sans text-xs outline-none"
+                  style={{
+                    background: 'rgba(255,255,255,0.04)',
+                    border: `1px solid ${error ? 'rgba(239, 68, 68, 0.8)' : 'rgba(247,238,240,0.15)'}`,
+                    borderRadius: '12px',
+                    padding: '0.8rem',
+                    color: 'var(--mist)',
+                    letterSpacing: '0.08em',
+                  }}
+                />
+
+                <div className="flex gap-2 mt-1">
+                  <button
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="flex-1 font-sans text-xs uppercase"
+                    style={{
+                      background: 'transparent',
+                      border: '1px solid rgba(247,238,240,0.1)',
+                      borderRadius: '10px',
+                      padding: '0.65rem',
+                      color: 'rgba(247,238,240,0.4)',
+                      cursor: 'pointer',
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 font-sans text-xs uppercase"
+                    style={{
+                      background: 'rgba(239, 68, 68, 0.15)',
+                      border: '1px solid rgba(239, 68, 68, 0.4)',
+                      borderRadius: '10px',
+                      padding: '0.65rem',
+                      color: '#ef4444',
+                      cursor: 'pointer',
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    Terminate
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
       {/* Ambient glows */}
       <div
         className="pointer-events-none fixed"
@@ -98,8 +239,6 @@ export default function PhaseCrossroads({ onChoose }: Props) {
       />
 
       <div className="relative z-10 w-full max-w-sm mx-auto">
-
-        {/* Eyebrow */}
         <motion.p
           className="font-sans text-center"
           style={{
@@ -117,7 +256,6 @@ export default function PhaseCrossroads({ onChoose }: Props) {
           the crossroads
         </motion.p>
 
-        {/* Headline */}
         <motion.h2
           className="font-serif text-center"
           style={{
@@ -136,7 +274,6 @@ export default function PhaseCrossroads({ onChoose }: Props) {
           <em style={{ color: 'var(--blush)' }}>an end.</em>
         </motion.h2>
 
-        {/* Question */}
         <motion.p
           className="font-serif text-center"
           style={{
@@ -154,7 +291,6 @@ export default function PhaseCrossroads({ onChoose }: Props) {
           What path do we take from here?
         </motion.p>
 
-        {/* Soft divider */}
         <motion.div
           style={{
             width: '36px',
@@ -167,42 +303,39 @@ export default function PhaseCrossroads({ onChoose }: Props) {
           transition={{ delay: 0.65, duration: 0.5 }}
         />
 
-        {/* Fork cards */}
         <div className="flex flex-col gap-3">
           <ForkCard
-  icon="🌸"
-  title="Let's be friends again"
-  description="Start fresh, rebuild what was good..."
-  onClick={() => {
-    notify('yes')
-    onChoose('yes')
-  }}
-  delay={0.8}
-/>
-<ForkCard
-  icon="🕊️"
-  title="It's time to say goodbye"
-  description="Honour what was, part without bitterness..."
-  onClick={() => {
-    notify('no')
-    onChoose('no')
-  }}
-  delay={0.95}
-/>
-<ForkCard
-  icon="️🍀"
-  title="Dont wanna answer.."
-  description="Dont feel like answering? its okay.."
-  onClick={() => {
-    notify('dont know')
-    onChoose('dont know')
-  }}
-  delay={0.95}
-/>
-
+            icon="🌸"
+            title="Let's be friends again"
+            description="Start fresh, rebuild what was good..."
+            onClick={() => {
+              notify('yes')
+              onChoose('yes')
+            }}
+            delay={0.8}
+          />
+          <ForkCard
+            icon="🕊️"
+            title="It's time to say goodbye"
+            description="Honour what was, part without bitterness..."
+            onClick={() => {
+              notify('no')
+              onChoose('no')
+            }}
+            delay={0.95}
+          />
+          <ForkCard
+            icon="❓"
+            title="Dont wanna answer.."
+            description="Dont feel like answering? its okay.."
+            onClick={() => {
+              notify('dont know')
+              onChoose('dont know')
+            }}
+            delay={1.1}
+          />
         </div>
 
-        {/* Footer note */}
         <motion.p
           className="font-sans text-center"
           style={{
@@ -218,7 +351,6 @@ export default function PhaseCrossroads({ onChoose }: Props) {
         >
           there's no wrong answer here
         </motion.p>
-
       </div>
     </motion.div>
   )
