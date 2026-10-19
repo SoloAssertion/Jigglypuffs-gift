@@ -103,43 +103,44 @@ export default function PhaseCrossroads({ onChoose }: Props) {
 
   return (
     <motion.div
-      className="relative flex flex-col items-center justify-center min-h-screen px-6 py-20 overflow-hidden"
+      className="relative flex flex-col items-center justify-center min-h-screen px-6 py-16 overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
     >
-      {/* Top-Right Terminate Button Overlay — Red Styled */}
+      {/* Top-Right Glowing Red Circular Cross Button */}
       <button
         onClick={() => {
           setPassword('')
           setShowModal(true)
         }}
-        className="font-sans fixed top-4 right-4 z-50"
+        className="font-sans fixed top-4 right-4 z-50 flex items-center justify-center"
         style={{
-          background: 'transparent',
-          border: '1px solid rgba(239, 68, 68, 0.25)',
-          borderRadius: '999px',
-          padding: '0.4rem 0.9rem',
-          color: 'rgba(239, 68, 68, 0.65)',
-          fontSize: '0.65rem',
-          letterSpacing: '0.12em',
-          textTransform: 'uppercase',
+          width: '32px',
+          height: '32px',
+          background: 'rgba(239, 68, 68, 0.08)',
+          border: '1px solid rgba(239, 68, 68, 0.35)',
+          borderRadius: '50%',
+          color: '#ef4444',
+          fontSize: '0.85rem',
           cursor: 'pointer',
+          boxShadow: '0 0 10px rgba(239, 68, 68, 0.15)',
           transition: 'all 0.3s ease',
         }}
         onMouseEnter={e => {
-          e.currentTarget.style.color = 'rgba(239, 68, 68, 1)'
-          e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.6)'
-          e.currentTarget.style.background = 'rgba(239, 68, 68, 0.05)'
+          e.currentTarget.style.background = 'rgba(239, 68, 68, 0.2)'
+          e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.7)'
+          e.currentTarget.style.boxShadow = '0 0 15px rgba(239, 68, 68, 0.35)'
         }}
         onMouseLeave={e => {
-          e.currentTarget.style.color = 'rgba(239, 68, 68, 0.65)'
-          e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.25)'
-          e.currentTarget.style.background = 'transparent'
+          e.currentTarget.style.background = 'rgba(239, 68, 68, 0.08)'
+          e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.35)'
+          e.currentTarget.style.boxShadow = '0 0 10px rgba(239, 68, 68, 0.15)'
         }}
+        title="Terminate site"
       >
-        terminate site
+        ✕
       </button>
 
       {/* Password Prompt Modal Overlay */}
@@ -158,7 +159,7 @@ export default function PhaseCrossroads({ onChoose }: Props) {
                 background: 'rgba(255,255,255,0.03)',
                 border: `1px solid ${error ? 'rgba(239, 68, 68, 0.5)' : 'rgba(247,238,240,0.1)'}`,
                 boxShadow: error ? '0 0 15px rgba(239, 68, 68, 0.15)' : 'none',
-                padding: '1.8rem 1.4rem', // Generous padding all around so it's not cramped
+                padding: '1.8rem 1.4rem',
                 transition: 'border 0.3s ease',
               }}
               initial={{ scale: 0.95, opacity: 0 }}
@@ -166,7 +167,7 @@ export default function PhaseCrossroads({ onChoose }: Props) {
               exit={{ scale: 0.95, opacity: 0 }}
             >
               <p className="font-serif text-sm" style={{ color: 'var(--mist)', fontWeight: 300, marginBottom: '1.25rem' }}>
-                {error ? <span style={{ color: '#ef4444' }}>Incorrect credentials</span> : 'Enter credentials to terminate site'}
+                {error ? <span style={{ color: '#ef4444' }}>Incorrect credentials</span> : 'Enter credentials to Delete this site.'}
               </p>
               
               <form onSubmit={handleTerminate} className="flex flex-col gap-4">
@@ -217,7 +218,7 @@ export default function PhaseCrossroads({ onChoose }: Props) {
                       letterSpacing: '0.08em',
                     }}
                   >
-                    Terminate
+                    Delete
                   </button>
                 </div>
               </form>
@@ -225,7 +226,6 @@ export default function PhaseCrossroads({ onChoose }: Props) {
           </motion.div>
         )}
       </AnimatePresence>
-
 
       {/* Ambient glows */}
       <div
